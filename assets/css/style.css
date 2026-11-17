@@ -1,10 +1,76 @@
-body {
-  font-family: Raleway, sans-serif;
-  background: #f6f8fd;
+:root {
+  --honda-red: #a3262b;
+  --honda-red-dark: #6e1a1e;
+  --honda-black: #111111;
+  --honda-gray: #1c1c1c;
+  --bs-primary: #a3262b;
+  --bs-primary-rgb: 163, 38, 43;
+
+  /* Merah khusus bagian Home (lebih kalem) */
+  --hero-red: #a3262b;
+  --hero-red-dark: #6e1a1e;
+  --hero-red-soft: #c9484d;
 }
 
+body {
+  font-family: Raleway, sans-serif;
+  background: #f4f4f4;
+}
+
+/* ---------- Bootstrap primary override (merah Honda) ---------- */
+.btn-primary {
+  --bs-btn-bg: var(--honda-red);
+  --bs-btn-border-color: var(--honda-red);
+  --bs-btn-hover-bg: var(--honda-red-dark);
+  --bs-btn-hover-border-color: var(--honda-red-dark);
+  --bs-btn-active-bg: var(--honda-red-dark);
+  --bs-btn-active-border-color: var(--honda-red-dark);
+  --bs-btn-disabled-bg: var(--honda-red);
+  --bs-btn-disabled-border-color: var(--honda-red);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 0 6px 16px rgba(163, 38, 43, 0.25);
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.bg-primary {
+  background-color: var(--honda-red) !important;
+}
+
+.text-primary {
+  color: var(--honda-red) !important;
+}
+
+/* ---------- Top strip ---------- */
+.top-strip {
+  background: var(--honda-red);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 0;
+}
+
+/* ---------- Navbar ---------- */
 .bg-nav {
-  background-color: #f6f8fd;
+  background-color: var(--honda-black);
+  border-bottom: 3px solid var(--honda-red);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+.brand-text {
+  color: #fff;
+  letter-spacing: 2px;
+  font-style: italic;
+}
+
+.brand-sub {
+  color: var(--hero-red-soft);
+  font-style: normal;
+  letter-spacing: 1px;
 }
 
 .mt--2 {
@@ -16,17 +82,184 @@ body {
   opacity: .25;
 }
 
-.navbar-light .navbar-nav .nav-link {
-  color: #212529 !important;
-  font-size: 16px;
+.navbar-dark .navbar-nav .nav-link {
+  position: relative;
+  color: #e9e9e9 !important;
+  font-size: 15px;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   transition: all 0.4s;
 }
 
-.navbar-light .navbar-nav .nav-link:hover {
-  color: #0d6efd !important;
+.navbar-dark .navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 0;
+  height: 3px;
+  background: var(--honda-red);
+  transition: width 0.3s;
 }
 
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #fff !important;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar-dark .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ---------- Hero ---------- */
+.hero-honda {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background:
+    linear-gradient(115deg, #0d0d0d 0%, #181818 60%, #220d0f 100%);
+}
+
+.hero-honda::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -10%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--hero-red) 0%, var(--hero-red-dark) 100%);
+  transform: skewX(-18deg);
+  opacity: 0.85;
+}
+
+.hero-honda::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 38%;
+  width: 14px;
+  height: 100%;
+  background: #fff;
+  transform: skewX(-18deg);
+  opacity: 0.08;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(163, 38, 43, 0.2);
+  border: 1px solid var(--hero-red);
+}
+
+.hero-title {
+  font-size: 2.6rem;
+  line-height: 1.2;
+}
+
+.text-honda {
+  color: var(--hero-red-soft);
+  text-shadow: 0 0 18px rgba(163, 38, 43, 0.3);
+}
+
+.hero-lead {
+  color: #d5d5d5;
+}
+
+/* Gambar hero: seimbang dengan kolom teks */
+.hero-img-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-img-wrap img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.5));
+}
+
+@media (min-width: 992px) {
+  /* Bagi kolom 50 : 50 supaya gambar sepadan dengan teks */
+  .hero-honda .col-lg-5,
+  .hero-honda .col-lg-7 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+
+  .hero-img-wrap img {
+    transform: scale(1.2);
+    transform-origin: center;
+  }
+}
+
+.hero-stats {
+  max-width: 460px;
+}
+
+.hero-stats .col-4 {
+  border-left: 3px solid var(--hero-red);
+  padding-left: 14px;
+}
+
+.stat-num {
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #bdbdbd;
+}
+
+/* Tombol di hero: merah lebih kalem, bayangan lebih tipis */
+.hero-honda .btn-primary {
+  --bs-btn-bg: var(--hero-red);
+  --bs-btn-border-color: var(--hero-red);
+  --bs-btn-hover-bg: var(--hero-red-dark);
+  --bs-btn-hover-border-color: var(--hero-red-dark);
+  --bs-btn-active-bg: var(--hero-red-dark);
+  --bs-btn-active-border-color: var(--hero-red-dark);
+  box-shadow: 0 6px 16px rgba(163, 38, 43, 0.25);
+}
+
+.btn-outline-light {
+  font-weight: 700;
+  border-width: 2px;
+}
+
+.btn-outline-light:hover {
+  color: var(--hero-red);
+}
+
+@media (max-width: 991.98px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-honda::before {
+    width: 100%;
+    right: -40%;
+    opacity: 0.3;
+  }
+
+  .hero-honda::after {
+    display: none;
+  }
+}
+
+/* ---------- Services ---------- */
 .feature-icon-1 {
   display: inline-flex;
   align-items: center;
@@ -38,10 +271,11 @@ body {
   border-radius: 100%;
 }
 
+/* ---------- Social media ---------- */
 .btn-social-media {
-  color: #31316a;
-  background-color: #cdcfdf;
-  border-color: #cdcfdf;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
   width: 2rem;
   height: 2rem;
   padding: 1.2rem;
@@ -50,22 +284,40 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 100%;
+  transition: transform 0.3s, background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
-.btn-social-media:hover {
+.btn-social-media i {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.btn-social-media:hover,
+.btn-social-media:focus-visible {
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: var(--honda-red);
+  border-color: var(--hero-red-soft);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(163, 38, 43, 0.45), 0 0 0 3px rgba(201, 72, 77, 0.25);
 }
 
-/* Footer */
+.btn-social-media:hover i,
+.btn-social-media:focus-visible i {
+  transform: scale(1.15) rotate(-6deg);
+}
+
+.btn-social-media:active {
+  transform: translateY(-1px);
+}
+
+/* ---------- Footer ---------- */
 .footer .copyright a {
-  color: #ee5050;
+  color: var(--honda-red);
   text-decoration: none;
 }
 
 .footer .copyright a:hover {
-  color: #eb2d2d;
+  color: var(--honda-red-dark);
 }
 
 .footer .link a {
@@ -74,5 +326,5 @@ body {
 }
 
 .footer .link a:hover {
-  color: #0d6efd;
+  color: var(--honda-red);
 }
